@@ -4,6 +4,7 @@
 
 Functions, utilities, etc., common used across multiple Bluest Eel projects
 
+[![Actions Status](https://github.com/bluest-eel/common/workflows/Go/badge.svg)](https://github.com/bluest-eel/common/actions)
 
 <!-- Named page links below: /-->
 
