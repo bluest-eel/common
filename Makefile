@@ -76,10 +76,10 @@ test-nocolor:
 
 tag:
 	@echo "Tags:"
-	@git tag
+	@git tag|tail -5
 	@git tag "v$(VERSION)"
 	@echo "New tag list:"
-	@git tag
+	@git tag|tail -6
 
 tag-and-push: tag
 	@git push --tags
