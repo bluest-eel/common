@@ -1,4 +1,4 @@
-VERSION = $(shell cat VERSION)
+VERSION ?= $(shell cat VERSION)
 GO ?= go
 GOFMT ?= $(GO)fmt
 GOMOD=on
@@ -83,6 +83,11 @@ tag:
 
 tag-and-push: tag
 	@git push --tags
+
+tag-delete: VERSION ?= 0.0.0
+tag-delete:
+	@git tag --delete v$(VERSION)
+	@git push --delete origin v$(VERSION)	
 
 #############################################################################
 ###   Misc   ################################################################

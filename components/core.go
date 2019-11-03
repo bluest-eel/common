@@ -4,6 +4,7 @@ import (
 	"github.com/geomyidia/reverb"
 	logger "github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/suite"
+	"github.com/urfave/cli"
 )
 
 // BaseApp ...
@@ -16,6 +17,7 @@ type BaseApp struct {
 
 // BaseCLI ...
 type BaseCLI struct {
+	CLIApp  *cli.App
 	Args    []string
 	Command string
 	RawArgs []string
@@ -36,7 +38,7 @@ type TestBase struct {
 	suite.Suite
 }
 
-// TestGRPC ...
+// TestBaseGRPC ...
 type TestBaseGRPC struct {
 	BaseGRPC
 	TestBase
