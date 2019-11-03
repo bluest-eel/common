@@ -2,7 +2,7 @@
 
 [![Project Logo][logo]][logo-large]
 
-Functions, utilities, etc., common used across multiple Bluest Eel projects
+*Functions, utilities, etc., common used across multiple Bluest Eel projects*
 
 [![Build Status][build-badge]][build]
 [![Go Report Card][report-card-badge]][report-card] 

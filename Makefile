@@ -1,6 +1,7 @@
 VERSION = $(shell cat VERSION)
 GO ?= go
 GOFMT ?= $(GO)fmt
+GOMOD=on
 DOCKER_ORG = bluesteelabm
 
 FIRST_GOPATH := $(firstword $(subst :, ,$(shell $(GO) env GOPATH)))
@@ -35,7 +36,7 @@ show-version:
 
 deps:
 	@echo '>> Downloading deps ...'
-	@$(GO) get -v -d ./...
+	@GO111MODULE=$(GOMOD) $(GO) get -v -d ./...
 
 $(GOLANGCI_LINT):
 	@echo ">> Couldn't find $(GOLANGCI_LINT); installing ..."
