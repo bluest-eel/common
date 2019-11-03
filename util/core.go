@@ -1,6 +1,9 @@
 package util
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 const na string = "N/A"
 
@@ -8,6 +11,7 @@ const na string = "N/A"
 type Version struct {
 	Semantic   string
 	BuildDate  string
+	BuildTime  *time.Time
 	GitCommit  string
 	GitBranch  string
 	GitSummary string
@@ -19,6 +23,11 @@ func BuildString(version *Version) string {
 		return na
 	}
 	return fmt.Sprintf("%s@%s, %s", version.GitBranch, version.GitCommit, version.BuildDate)
+}
+
+// GetBuildTime ...
+func GetBuildTime(version *Version) *time.Time {
+	return version.BuildTime
 }
 
 // VersionString ...
