@@ -68,3 +68,28 @@ test: $(RICH_GO)
 test-nocolor:
 	@echo '>> Running all tests'
 	@$(GO) test ./... -v
+
+#############################################################################
+###   Release Process   #####################################################
+#############################################################################
+
+tag:
+	@echo "Tags:"
+	@git tag
+	@git tag "v$(VERSION)"
+	@echo "New tag list:"
+	@git tag
+
+#############################################################################
+###   Misc   ################################################################
+#############################################################################
+
+clean-cache:
+	@echo '>> Purging Go mod cahce ...'
+	@$(GO) clean -cache
+	@$(GO) clean -modcache
+
+show-targets:
+	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | \
+	awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | \
+	sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
