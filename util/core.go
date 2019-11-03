@@ -9,12 +9,12 @@ const na string = "N/A"
 
 // Version data
 type Version struct {
-	Semantic   string
-	BuildDate  string
-	BuildTime  *time.Time
-	GitCommit  string
-	GitBranch  string
-	GitSummary string
+	Semantic   string     `json:"semantic"`
+	BuildDate  string     `json:"build-date"`
+	BuildTime  *time.Time `json:"build-time"`
+	GitCommit  string     `json:"git-commit"`
+	GitBranch  string     `json:"git-branch"`
+	GitSummary string     `json:"git-summary"`
 }
 
 // BuildString ...
