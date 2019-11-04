@@ -23,6 +23,7 @@ const (
 type Options struct {
 	AbsPath     string // The absolute path to the config file
 	AppName     string
+	ConfigDir   string
 	File        string // The name of the config file, minus any path or extension
 	ProjectPath string // The absolute path to the project being configured
 	RelPath     string // The relative path to the config file
@@ -35,11 +36,12 @@ func Bootstrap(appName string, projectPath string) {
 		AbsPath:     AbsConfigPath("", projectPath, DefaultConfigDir),
 		AppName:     appName,
 		File:        DefaultConfigFile,
+		ConfigDir:   DefaultConfigDir,
 		ProjectPath: projectPath,
 		RelPath:     DefaultConfigFile,
 		Type:        DefaultConfigType,
 	}
-	setConfiguration(opts)
+	SetConfiguration(opts)
 }
 
 // Setup ...
@@ -47,11 +49,15 @@ func Setup(appName string, projectPath string, filepath string) {
 	opts := ParseConfigFilename(filepath, projectPath)
 	opts.AppName = appName
 	opts.ProjectPath = projectPath
-	setConfiguration(opts)
+	SetConfiguration(opts)
 }
 
-func setConfiguration(opts *Options) {
-	cfg.AddConfigPath(DefaultConfigDir)
+// SetConfiguration ...
+func SetConfiguration(opts *Options) {
+	if opts.AbsPath == "" {
+		opts.AbsPath = AbsConfigPath("", opts.ProjectPath, opts.ConfigDir)
+	}
+	cfg.AddConfigPath(opts.ConfigDir)
 	cfg.AddConfigPath(opts.RelPath)
 	cfg.SetConfigName(opts.File)
 	cfg.SetConfigType(opts.Type)
