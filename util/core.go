@@ -1,6 +1,8 @@
 package util
 
 import (
+	"bytes"
+	"encoding/gob"
 	"path/filepath"
 
 	log "github.com/sirupsen/logrus"
@@ -40,4 +42,21 @@ func CallerPaths(pc uintptr, file string, line int, ok bool) *CallerTree {
 		DotDotDotPath:    dotDotCallerPath,
 		DotDotDotDotPath: dotDotDotCallerPath,
 	}
+}
+
+// GOBEncode ...
+func GOBEncode(v interface{}) ([]byte, error) {
+	var buf bytes.Buffer
+	enc := gob.NewEncoder(&buf)
+	err := enc.Encode(v)
+
+	return buf.Bytes(), err
+}
+
+// GOBDecode ...
+func GOBDecode(b []byte, result interface{}) error {
+	buf := bytes.NewBuffer(b)
+	enc := gob.NewDecoder(buf)
+
+	return enc.Decode(result)
 }
